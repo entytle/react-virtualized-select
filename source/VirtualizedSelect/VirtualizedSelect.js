@@ -15,6 +15,7 @@ export default class VirtualizedSelect extends Component {
     maxHeight: PropTypes.number.isRequired,
     optionHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]).isRequired,
     optionRenderer: PropTypes.func,
+    innerMenuRenderer: PropTypes.func,
     selectComponent: PropTypes.func
   };
 
@@ -47,27 +48,40 @@ export default class VirtualizedSelect extends Component {
     }
   }
 
+  getInnerMenuHeight () {
+    return this._innerMenuRef ? this._innerMenuRef.offsetHeight : 0
+  }
+
   render () {
     const SelectComponent = this._getSelectComponent()
+    const {innerMenuRenderer, maxHeight} = this.props
+    let updatedHeight = maxHeight
+    if (innerMenuRenderer) {
+      updatedHeight += this.getInnerMenuHeight()
+    }
 
     return (
       <SelectComponent
         {...this.props}
         ref={this._setSelectRef}
         menuRenderer={this._renderMenu}
-        menuStyle={{ overflow: 'hidden' }}
+        menuStyle={{
+          overflow: 'hidden',
+          ...innerMenuRenderer && {maxHeight: (updatedHeight - 2) + 'px'}
+        }}
+        { ...innerMenuRenderer && {menuContainerStyle: { maxHeight: updatedHeight + 'px' }}}
       />
     )
   }
 
   // See https://github.com/JedWatson/react-select/#effeciently-rendering-large-lists-with-windowing
   _renderMenu ({ focusedOption, focusOption, labelKey, onSelect, options, selectValue, valueArray }) {
-    const { listProps, optionRenderer } = this.props
+    const { listProps, optionRenderer, innerMenuRenderer } = this.props
     const focusedOptionIndex = options.indexOf(focusedOption)
     const height = this._calculateListHeight({ options })
     const innerRowRenderer = optionRenderer || this._optionRenderer
 
-    // react-select 1.0.0-rc2 passes duplicate `onSelect` and `selectValue` props to `menuRenderer`
+    // react-select 1.0.0-rc3 passes duplicate `onSelect` and `selectValue` props to `menuRenderer`
     // The `Creatable` HOC only overrides `onSelect` which breaks an edge-case
     // In order to support creating items via clicking on the placeholder option,
     // We need to ensure that the specified `onSelect` handle is the one we use.
@@ -95,19 +109,31 @@ export default class VirtualizedSelect extends Component {
     return (
       <AutoSizer disableHeight>
         {({ width }) => (
-          <List
-            className='VirtualSelectGrid'
-            height={height}
-            ref={this._setListRef}
-            rowCount={options.length}
-            rowHeight={({ index }) => this._getOptionHeight({
-              option: options[index]
-            })}
-            rowRenderer={wrappedRowRenderer}
-            scrollToIndex={focusedOptionIndex}
-            width={width}
-            {...listProps}
-          />
+          <div className='VirtualizedSelectGridWrapper'>
+            { innerMenuRenderer ? (
+                  <div
+                      className='VirtualizedSelectInnerMenu'
+                      ref={(elem) => this._innerMenuRef = elem}
+                      style={{width: `${width}px`}}
+                  >
+                      {innerMenuRenderer()}
+                  </div>
+              ) : null
+            }
+            <List
+              className='VirtualSelectGrid'
+              height={height}
+              ref={this._setListRef}
+              rowCount={options.length}
+              rowHeight={({ index }) => this._getOptionHeight({
+                option: options[index]
+              })}
+              rowRenderer={wrappedRowRenderer}
+              scrollToIndex={focusedOptionIndex}
+              width={width}
+              {...listProps}
+            />
+          </div>
         )}
       </AutoSizer>
     )
