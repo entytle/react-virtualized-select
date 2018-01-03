@@ -126,26 +126,20 @@
                     if (this._selectRef) return this._selectRef.focus();
                 }
             }, {
-                key: "getInnerMenuHeight",
-                value: function() {
-                    return this._innerMenuRef ? this._innerMenuRef.offsetHeight : 0;
-                }
-            }, {
                 key: "render",
                 value: function() {
-                    var SelectComponent = this._getSelectComponent(), _props = this.props, innerMenuRenderer = _props.innerMenuRenderer, maxHeight = _props.maxHeight, updatedHeight = maxHeight;
-                    return innerMenuRenderer && (updatedHeight += this.getInnerMenuHeight()), _react2.default.createElement(SelectComponent, (0, 
-                    _extends3.default)({}, this.props, {
+                    var SelectComponent = this._getSelectComponent();
+                    return _react2.default.createElement(SelectComponent, (0, _extends3.default)({}, this.props, {
                         ref: this._setSelectRef,
                         menuRenderer: this._renderMenu,
                         menuStyle: (0, _extends3.default)({
                             overflow: "hidden"
-                        }, innerMenuRenderer && {
-                            maxHeight: updatedHeight - 2 + "px"
+                        }, this.props.innerMenuRenderer && {
+                            maxHeight: "initial"
                         })
-                    }, innerMenuRenderer && {
+                    }, this.props.innerMenuRenderer && {
                         menuContainerStyle: {
-                            maxHeight: updatedHeight + "px"
+                            maxHeight: "initial"
                         }
                     }));
                 }
@@ -170,7 +164,7 @@
                         });
                     }
                     var _this2 = this, focusedOption = _ref.focusedOption, focusOption = _ref.focusOption, labelKey = _ref.labelKey, onSelect = _ref.onSelect, options = _ref.options, valueArray = (_ref.selectValue, 
-                    _ref.valueArray), _props2 = this.props, listProps = _props2.listProps, optionRenderer = _props2.optionRenderer, innerMenuRenderer = _props2.innerMenuRenderer, focusedOptionIndex = options.indexOf(focusedOption), height = this._calculateListHeight({
+                    _ref.valueArray), _props = this.props, listProps = _props.listProps, optionRenderer = _props.optionRenderer, innerMenuRenderer = _props.innerMenuRenderer, focusedOptionIndex = options.indexOf(focusedOption), height = this._calculateListHeight({
                         options: options
                     }), innerRowRenderer = optionRenderer || this._optionRenderer;
                     return (0, _jsx3.default)(_AutoSizer2.default, {
@@ -227,7 +221,7 @@
             }, {
                 key: "_getSelectComponent",
                 value: function() {
-                    var _props3 = this.props, async = _props3.async, selectComponent = _props3.selectComponent;
+                    var _props2 = this.props, async = _props2.async, selectComponent = _props2.selectComponent;
                     return selectComponent ? selectComponent : async ? _reactSelect2.default.Async : _reactSelect2.default;
                 }
             }, {

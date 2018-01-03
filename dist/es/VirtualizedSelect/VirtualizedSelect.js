@@ -50,30 +50,17 @@ var VirtualizedSelect = function (_Component) {
       }
     }
   }, {
-    key: 'getInnerMenuHeight',
-    value: function getInnerMenuHeight() {
-      return this._innerMenuRef ? this._innerMenuRef.offsetHeight : 0;
-    }
-  }, {
     key: 'render',
     value: function render() {
       var SelectComponent = this._getSelectComponent();
-      var _props = this.props,
-          innerMenuRenderer = _props.innerMenuRenderer,
-          maxHeight = _props.maxHeight;
-
-      var updatedHeight = maxHeight;
-      if (innerMenuRenderer) {
-        updatedHeight += this.getInnerMenuHeight();
-      }
 
       return React.createElement(SelectComponent, _extends({}, this.props, {
         ref: this._setSelectRef,
         menuRenderer: this._renderMenu,
         menuStyle: _extends({
           overflow: 'hidden'
-        }, innerMenuRenderer && { maxHeight: updatedHeight - 2 + 'px' })
-      }, innerMenuRenderer && { menuContainerStyle: { maxHeight: updatedHeight + 'px' } }));
+        }, this.props.innerMenuRenderer && { maxHeight: 'initial' })
+      }, this.props.innerMenuRenderer && { menuContainerStyle: { maxHeight: 'initial' } }));
     }
 
     // See https://github.com/JedWatson/react-select/#effeciently-rendering-large-lists-with-windowing
@@ -90,10 +77,10 @@ var VirtualizedSelect = function (_Component) {
           options = _ref.options,
           selectValue = _ref.selectValue,
           valueArray = _ref.valueArray;
-      var _props2 = this.props,
-          listProps = _props2.listProps,
-          optionRenderer = _props2.optionRenderer,
-          innerMenuRenderer = _props2.innerMenuRenderer;
+      var _props = this.props,
+          listProps = _props.listProps,
+          optionRenderer = _props.optionRenderer,
+          innerMenuRenderer = _props.innerMenuRenderer;
 
       var focusedOptionIndex = options.indexOf(focusedOption);
       var height = this._calculateListHeight({ options: options });
@@ -200,9 +187,9 @@ var VirtualizedSelect = function (_Component) {
   }, {
     key: '_getSelectComponent',
     value: function _getSelectComponent() {
-      var _props3 = this.props,
-          async = _props3.async,
-          selectComponent = _props3.selectComponent;
+      var _props2 = this.props,
+          async = _props2.async,
+          selectComponent = _props2.selectComponent;
 
 
       if (selectComponent) {

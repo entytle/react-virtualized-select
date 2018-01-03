@@ -48,17 +48,8 @@ export default class VirtualizedSelect extends Component {
     }
   }
 
-  getInnerMenuHeight () {
-    return this._innerMenuRef ? this._innerMenuRef.offsetHeight : 0
-  }
-
   render () {
     const SelectComponent = this._getSelectComponent()
-    const {innerMenuRenderer, maxHeight} = this.props
-    let updatedHeight = maxHeight
-    if (innerMenuRenderer) {
-      updatedHeight = this.getInnerMenuHeight()
-    }
 
     return (
       <SelectComponent
@@ -67,9 +58,9 @@ export default class VirtualizedSelect extends Component {
         menuRenderer={this._renderMenu}
         menuStyle={{
           overflow: 'hidden',
-          ...innerMenuRenderer && {maxHeight: (updatedHeight - 2) + 'px'}
+          ...this.props.innerMenuRenderer && {maxHeight: 'initial'}
         }}
-        { ...innerMenuRenderer && {menuContainerStyle: { maxHeight: updatedHeight + 'px' }}}
+        { ...this.props.innerMenuRenderer && {menuContainerStyle: { maxHeight: 'initial' }}}
       />
     )
   }
