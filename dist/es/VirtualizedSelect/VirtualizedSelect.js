@@ -99,7 +99,7 @@ var VirtualizedSelect = function (_Component) {
       var height = this._calculateListHeight({ options: options });
       var innerRowRenderer = optionRenderer || this._optionRenderer;
 
-      // react-select 1.0.0-rc2 passes duplicate `onSelect` and `selectValue` props to `menuRenderer`
+      // react-select 1.0.0-rc3 passes duplicate `onSelect` and `selectValue` props to `menuRenderer`
       // The `Creatable` HOC only overrides `onSelect` which breaks an edge-case
       // In order to support creating items via clicking on the placeholder option,
       // We need to ensure that the specified `onSelect` handle is the one we use.
@@ -133,6 +133,22 @@ var VirtualizedSelect = function (_Component) {
         { disableHeight: true },
         function (_ref3) {
           var width = _ref3.width;
+
+          var virutalizedList = React.createElement(List, _extends({
+            className: 'VirtualSelectGrid',
+            height: height,
+            ref: _this2._setListRef,
+            rowCount: options.length,
+            rowHeight: function rowHeight(_ref4) {
+              var index = _ref4.index;
+              return _this2._getOptionHeight({
+                option: options[index]
+              });
+            },
+            rowRenderer: wrappedRowRenderer,
+            scrollToIndex: focusedOptionIndex,
+            width: width
+          }, listProps));
           return React.createElement(
             'div',
             { className: 'VirtualizedSelectGridWrapper' },
@@ -145,23 +161,8 @@ var VirtualizedSelect = function (_Component) {
                 },
                 style: { width: width + 'px' }
               },
-              innerMenuRenderer()
-            ) : null,
-            React.createElement(List, _extends({
-              className: 'VirtualSelectGrid',
-              height: height,
-              ref: _this2._setListRef,
-              rowCount: options.length,
-              rowHeight: function rowHeight(_ref4) {
-                var index = _ref4.index;
-                return _this2._getOptionHeight({
-                  option: options[index]
-                });
-              },
-              rowRenderer: wrappedRowRenderer,
-              scrollToIndex: focusedOptionIndex,
-              width: width
-            }, listProps))
+              innerMenuRenderer(virutalizedList)
+            ) : virutalizedList
           );
         }
       );
