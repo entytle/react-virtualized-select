@@ -57,7 +57,7 @@ export default class VirtualizedSelect extends Component {
     const {innerMenuRenderer, maxHeight} = this.props
     let updatedHeight = maxHeight
     if (innerMenuRenderer) {
-      updatedHeight += this.getInnerMenuHeight()
+      updatedHeight = this.getInnerMenuHeight()
     }
 
     return (
@@ -108,33 +108,33 @@ export default class VirtualizedSelect extends Component {
 
     return (
       <AutoSizer disableHeight>
-        {({ width }) => (
-          <div className='VirtualizedSelectGridWrapper'>
+        {({ width }) => {
+          const virutalizedList = <List
+            className='VirtualSelectGrid'
+            height={height}
+            ref={this._setListRef}
+            rowCount={options.length}
+            rowHeight={({ index }) => this._getOptionHeight({
+              option: options[index]
+            })}
+            rowRenderer={wrappedRowRenderer}
+            scrollToIndex={focusedOptionIndex}
+            width={width}
+            {...listProps}
+          />
+          return <div className='VirtualizedSelectGridWrapper'>
             { innerMenuRenderer ? (
                   <div
                       className='VirtualizedSelectInnerMenu'
                       ref={(elem) => this._innerMenuRef = elem}
                       style={{width: `${width}px`}}
                   >
-                      {innerMenuRenderer()}
+                      {innerMenuRenderer(virutalizedList)}
                   </div>
-              ) : null
+              ) : virutalizedList
             }
-            <List
-              className='VirtualSelectGrid'
-              height={height}
-              ref={this._setListRef}
-              rowCount={options.length}
-              rowHeight={({ index }) => this._getOptionHeight({
-                option: options[index]
-              })}
-              rowRenderer={wrappedRowRenderer}
-              scrollToIndex={focusedOptionIndex}
-              width={width}
-              {...listProps}
-            />
           </div>
-        )}
+        }}
       </AutoSizer>
     )
   }
