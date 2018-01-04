@@ -175,7 +175,7 @@ var VirtualizedSelect = function (_Component) {
                 },
                 style: { width: width + 'px' }
               },
-              innerMenuRenderer(virutalizedList)
+              innerMenuRenderer(virutalizedList, _this2.props)
             ) : virutalizedList
           );
         }

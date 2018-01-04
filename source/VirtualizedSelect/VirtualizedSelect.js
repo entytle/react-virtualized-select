@@ -120,7 +120,7 @@ export default class VirtualizedSelect extends Component {
                       ref={(elem) => this._innerMenuRef = elem}
                       style={{width: `${width}px`}}
                   >
-                      {innerMenuRenderer(virutalizedList)}
+                      {innerMenuRenderer(virutalizedList, this.props)}
                   </div>
               ) : virutalizedList
             }
