@@ -161,7 +161,7 @@ export default class VirtualizedSelectExample extends Component {
         </h4>
 
         <div className={styles.description}>
-          Displays an async <code>Select</code> component wired up to search for Github users.
+          Displays an async <code>Select</code> component wired up to search for GitHub users.
         </div>
 
         <VirtualizedSelect
@@ -217,7 +217,7 @@ export default class VirtualizedSelectExample extends Component {
   }
 }
 
-function CountryOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, key, labelKey, option, options, selectValue, style, valueArray }) {
+function CountryOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, key, labelKey, option, options, selectValue, style, valueArray, valueKey }) {
   const flagImageUrl = `https://cdn.rawgit.com/hjnilsson/country-flags/9e827754/svg/${option.code.toLowerCase()}.svg`
 
   const classNames = [styles.countryOption]
@@ -233,7 +233,7 @@ function CountryOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption
       className={classNames.join(' ')}
       key={key}
       onClick={() => selectValue(option)}
-      onMouseOver={() => focusOption(option)}
+      onMouseEnter={() => focusOption(option)}
       style={style}
     >
       <label className={styles.countryLabel}>
@@ -247,7 +247,7 @@ function CountryOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption
   )
 }
 
-function NameOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, key, labelKey, option, optionIndex, options, selectValue, style, valueArray }) {
+function NameOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, key, labelKey, option, optionIndex, options, selectValue, style, valueArray, valueKey }) {
   const classNames = [styles.nameOption]
 
   if (option.type === 'header') {
@@ -275,7 +275,7 @@ function NameOptionRenderer ({ focusedOption, focusedOptionIndex, focusOption, k
         className={classNames.join(' ')}
         key={key}
         onClick={() => selectValue(option)}
-        onMouseOver={() => focusOption(option)}
+        onMouseEnter={() => focusOption(option)}
         style={style}
       >
         {option.name}

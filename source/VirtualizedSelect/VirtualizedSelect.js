@@ -12,8 +12,8 @@ export default class VirtualizedSelect extends Component {
   static propTypes = {
     async: PropTypes.bool,
     listProps: PropTypes.object,
-    maxHeight: PropTypes.number.isRequired,
-    optionHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]).isRequired,
+    maxHeight: PropTypes.number,
+    optionHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
     optionRenderer: PropTypes.func,
     innerMenuRenderer: PropTypes.func,
     selectComponent: PropTypes.func
@@ -66,7 +66,7 @@ export default class VirtualizedSelect extends Component {
   }
 
   // See https://github.com/JedWatson/react-select/#effeciently-rendering-large-lists-with-windowing
-  _renderMenu ({ focusedOption, focusOption, labelKey, onSelect, options, selectValue, valueArray }) {
+  _renderMenu ({ focusedOption, focusOption, labelKey, onSelect, options, selectValue, valueArray, valueKey }) {
     const { listProps, optionRenderer, innerMenuRenderer } = this.props
     const focusedOptionIndex = options.indexOf(focusedOption)
     const height = this._calculateListHeight({ options })
@@ -93,7 +93,8 @@ export default class VirtualizedSelect extends Component {
         options,
         selectValue: onSelect,
         style,
-        valueArray
+        valueArray,
+        valueKey
       })
     }
 
@@ -183,11 +184,15 @@ export default class VirtualizedSelect extends Component {
       className.push('VirtualizedSelectSelectedOption')
     }
 
+    if (option.className) {
+      className.push(option.className)
+    }
+
     const events = option.disabled
       ? {}
       : {
         onClick: () => selectValue(option),
-        onMouseOver: () => focusOption(option)
+        onMouseEnter: () => focusOption(option)
       }
 
     return (
