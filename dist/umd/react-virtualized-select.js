@@ -2368,7 +2368,7 @@
                 return [ "clearValue", "focusOption", "getOptionLabel", "handleInputBlur", "handleInputChange", "handleInputFocus", "handleInputValueChange", "handleKeyDown", "handleMenuScroll", "handleMouseDown", "handleMouseDownOnArrow", "handleMouseDownOnMenu", "handleTouchEnd", "handleTouchEndClearValue", "handleTouchMove", "handleTouchOutside", "handleTouchStart", "handleValueClick", "onOptionRef", "removeValue", "selectValue" ].forEach(function(fn) {
                     return _this[fn] = _this[fn].bind(_this);
                 }), _this.state = {
-                    inputValue: "",
+                    inputValue: props.inputValue || "",
                     isFocused: !1,
                     isOpen: !1,
                     isPseudoFocused: !1,
@@ -3357,7 +3357,9 @@
             // valueRenderer: function (option) {}
             wrapperStyle: _propTypes2.default.object,
             // optional style to apply to the component wrapper
-            isAlwaysOpen: _propTypes2.default.bool
+            isAlwaysOpen: _propTypes2.default.bool,
+            // optional value to check if dropdown has to kept open always
+            inputValue: _propTypes2.default.string
         }, Select.defaultProps = {
             arrowRenderer: _defaultArrowRenderer2.default,
             autosize: !0,
