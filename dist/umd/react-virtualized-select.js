@@ -3160,7 +3160,8 @@
                     var _this9 = this, valueArray = this.getValueArray(this.props.value), options = this._visibleOptions = this.filterOptions(this.props.multi && this.props.removeSelected ? valueArray : null), isOpen = this.state.isOpen;
                     this.props.multi && !options.length && valueArray.length && !this.state.inputValue && (isOpen = !1);
                     var focusedOptionIndex = this.getFocusableOptionIndex(valueArray[0]), focusedOption = null;
-                    focusedOption = null !== focusedOptionIndex ? this._focusedOption = options[focusedOptionIndex] : this._focusedOption = null;
+                    focusedOption = null !== focusedOptionIndex ? this._focusedOption = options[focusedOptionIndex] : this._focusedOption = null, 
+                    isOpen = this.props.isAlwaysOpen || isOpen;
                     var className = (0, _classnames2.default)("Select", this.props.className, {
                         "has-value": valueArray.length,
                         "is-clearable": this.props.clearable,
@@ -3354,7 +3355,9 @@
             // path of the label value in option objects
             valueRenderer: _propTypes2.default.func,
             // valueRenderer: function (option) {}
-            wrapperStyle: _propTypes2.default.object
+            wrapperStyle: _propTypes2.default.object,
+            // optional style to apply to the component wrapper
+            isAlwaysOpen: _propTypes2.default.bool
         }, Select.defaultProps = {
             arrowRenderer: _defaultArrowRenderer2.default,
             autosize: !0,
@@ -3398,7 +3401,8 @@
             tabSelectsValue: !0,
             trimFilter: !0,
             valueComponent: _Value2.default,
-            valueKey: "value"
+            valueKey: "value",
+            isAlwaysOpen: !1
         }, exports.default = Select;
     }, /* 109 */
     /***/
