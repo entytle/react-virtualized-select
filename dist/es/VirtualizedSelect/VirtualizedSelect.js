@@ -76,7 +76,8 @@ var VirtualizedSelect = function (_Component) {
           onSelect = _ref.onSelect,
           options = _ref.options,
           selectValue = _ref.selectValue,
-          valueArray = _ref.valueArray;
+          valueArray = _ref.valueArray,
+          valueKey = _ref.valueKey;
       var _props = this.props,
           listProps = _props.listProps,
           optionRenderer = _props.optionRenderer,
@@ -111,7 +112,8 @@ var VirtualizedSelect = function (_Component) {
           options: options,
           selectValue: onSelect,
           style: style,
-          valueArray: valueArray
+          valueArray: valueArray,
+          valueKey: valueKey
         });
       }
 
@@ -226,11 +228,15 @@ var VirtualizedSelect = function (_Component) {
         className.push('VirtualizedSelectSelectedOption');
       }
 
+      if (option.className) {
+        className.push(option.className);
+      }
+
       var events = option.disabled ? {} : {
         onClick: function onClick() {
           return selectValue(option);
         },
-        onMouseOver: function onMouseOver() {
+        onMouseEnter: function onMouseEnter() {
           return focusOption(option);
         }
       };
@@ -264,8 +270,8 @@ var VirtualizedSelect = function (_Component) {
 VirtualizedSelect.propTypes = {
   async: PropTypes.bool,
   listProps: PropTypes.object,
-  maxHeight: PropTypes.number.isRequired,
-  optionHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]).isRequired,
+  maxHeight: PropTypes.number,
+  optionHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.func]),
   optionRenderer: PropTypes.func,
   innerMenuRenderer: PropTypes.func,
   selectComponent: PropTypes.func
