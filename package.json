@@ -121,7 +121,7 @@
   "dependencies": {
     "babel-runtime": "^6.11.6",
     "prop-types": "^15.5.8",
-    "react-select": "github:entytle/react-select#entytle-react-select",
+    "react-select": "github:entytle/react-select#v1.x",
     "react-virtualized": "9.7.4"
   },
   "peerDependencies": {
