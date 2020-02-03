@@ -4461,7 +4461,7 @@
                 _classCallCheck(this, Async);
                 var _this = _possibleConstructorReturn(this, (Async.__proto__ || Object.getPrototypeOf(Async)).call(this, props, context));
                 return _this._cache = props.cache === defaultCache ? {} : props.cache, _this.state = {
-                    inputValue: "",
+                    inputValue: props.inputValue || "",
                     isLoading: !1,
                     options: props.options
                 }, _this.onInputChange = _this.onInputChange.bind(_this), _this;
