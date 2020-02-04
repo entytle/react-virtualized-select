@@ -2368,7 +2368,7 @@
                 return [ "clearValue", "focusOption", "getOptionLabel", "handleInputBlur", "handleInputChange", "handleInputFocus", "handleInputValueChange", "handleKeyDown", "handleMenuScroll", "handleMouseDown", "handleMouseDownOnArrow", "handleMouseDownOnMenu", "handleTouchEnd", "handleTouchEndClearValue", "handleTouchMove", "handleTouchOutside", "handleTouchStart", "handleValueClick", "onOptionRef", "removeValue", "selectValue" ].forEach(function(fn) {
                     return _this[fn] = _this[fn].bind(_this);
                 }), _this.state = {
-                    inputValue: "",
+                    inputValue: props.inputValue || "",
                     isFocused: !1,
                     isOpen: props.isAlwaysOpen || !1,
                     isPseudoFocused: !1,
@@ -3357,7 +3357,9 @@
             // valueRenderer: function (option) {}
             wrapperStyle: _propTypes2.default.object,
             // optional style to apply to the component wrapper
-            isAlwaysOpen: _propTypes2.default.bool
+            isAlwaysOpen: _propTypes2.default.bool,
+            // optional value to check if dropdown has to kept open always
+            inputValue: _propTypes2.default.string
         }, Select.defaultProps = {
             arrowRenderer: _defaultArrowRenderer2.default,
             autosize: !0,
@@ -4414,6 +4416,7 @@
                 Constructor;
             };
         }(), _propTypes = __webpack_require__(96), _propTypes2 = _interopRequireDefault(_propTypes), _react = __webpack_require__(106), _react2 = _interopRequireDefault(_react), _Select = __webpack_require__(108), _Select2 = _interopRequireDefault(_Select), _stripDiacritics = __webpack_require__(115), _stripDiacritics2 = _interopRequireDefault(_stripDiacritics), propTypes = {
+            inputValue: _propTypes2.default.string,
             autoload: _propTypes2.default.bool.isRequired,
             // automatically call the `loadOptions` prop on-mount; defaults to true
             cache: _propTypes2.default.any,
@@ -4459,7 +4462,7 @@
                 _classCallCheck(this, Async);
                 var _this = _possibleConstructorReturn(this, (Async.__proto__ || Object.getPrototypeOf(Async)).call(this, props, context));
                 return _this._cache = props.cache === defaultCache ? {} : props.cache, _this.state = {
-                    inputValue: "",
+                    inputValue: props.inputValue || "",
                     isLoading: !1,
                     options: props.options
                 }, _this.onInputChange = _this.onInputChange.bind(_this), _this;
