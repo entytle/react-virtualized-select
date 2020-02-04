@@ -2368,12 +2368,11 @@
                 return [ "clearValue", "focusOption", "getOptionLabel", "handleInputBlur", "handleInputChange", "handleInputFocus", "handleInputValueChange", "handleKeyDown", "handleMenuScroll", "handleMouseDown", "handleMouseDownOnArrow", "handleMouseDownOnMenu", "handleTouchEnd", "handleTouchEndClearValue", "handleTouchMove", "handleTouchOutside", "handleTouchStart", "handleValueClick", "onOptionRef", "removeValue", "selectValue" ].forEach(function(fn) {
                     return _this[fn] = _this[fn].bind(_this);
                 }), _this.state = {
-                    inputValue: props.inputValue || "",
+                    inputValue: "",
                     isFocused: !1,
                     isOpen: props.isAlwaysOpen || !1,
                     isPseudoFocused: !1,
-                    required: !1,
-                    focusedOption: props.focusedOption || {}
+                    required: !1
                 }, _this;
             }
             return _inherits(Select, _React$Component), _createClass(Select, [ {
@@ -3358,10 +3357,7 @@
             // valueRenderer: function (option) {}
             wrapperStyle: _propTypes2.default.object,
             // optional style to apply to the component wrapper
-            isAlwaysOpen: _propTypes2.default.bool,
-            // optional value to check if dropdown has to kept open always
-            inputValue: _propTypes2.default.string,
-            focusedOption: _propTypes2.default.any
+            isAlwaysOpen: _propTypes2.default.bool
         }, Select.defaultProps = {
             arrowRenderer: _defaultArrowRenderer2.default,
             autosize: !0,
@@ -3389,9 +3385,9 @@
             menuRenderer: _defaultMenuRenderer2.default,
             multi: !1,
             noResultsText: "No results found",
-            onBlurResetsInput: !1,
+            onBlurResetsInput: !0,
             onCloseResetsInput: !0,
-            onSelectResetsInput: !1,
+            onSelectResetsInput: !0,
             openOnClick: !0,
             optionComponent: _Option2.default,
             pageSize: 5,
@@ -4463,7 +4459,7 @@
                 _classCallCheck(this, Async);
                 var _this = _possibleConstructorReturn(this, (Async.__proto__ || Object.getPrototypeOf(Async)).call(this, props, context));
                 return _this._cache = props.cache === defaultCache ? {} : props.cache, _this.state = {
-                    inputValue: props.inputValue || "",
+                    inputValue: "",
                     isLoading: !1,
                     options: props.options
                 }, _this.onInputChange = _this.onInputChange.bind(_this), _this;
