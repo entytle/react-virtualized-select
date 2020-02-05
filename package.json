@@ -19,9 +19,7 @@
     "deploy": "gh-pages -d build",
     "lint": "standard",
     "prebuild": "npm run lint",
-    "postpublish": "npm run deploy",
     "posttest": "codecov",
-    "prepublish": "npm run build",
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --config webpack.config.dev.js",
     "stats": "NODE_ENV=production webpack --config webpack.config.demo.js -p --json > stats.json",
     "test": "npm run lint && npm run test:unit",
@@ -105,7 +103,7 @@
     "react": "^15.3.0",
     "react-addons-test-utils": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-select": "^1.0.0",
+    "react-select": "github:entytle/react-select#v1.x",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "react-virtualized": "9.7.4",
@@ -121,7 +119,7 @@
   "dependencies": {
     "babel-runtime": "^6.11.6",
     "prop-types": "^15.5.8",
-    "react-select": "1.1.0",
+    "react-select": "github:entytle/react-select#v1.x",
     "react-virtualized": "9.7.4"
   },
   "peerDependencies": {
