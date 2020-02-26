@@ -2372,7 +2372,8 @@
                     isFocused: !1,
                     isOpen: props.isAlwaysOpen || !1,
                     isPseudoFocused: !1,
-                    required: !1
+                    required: !1,
+                    isSelected: !1
                 }, _this;
             }
             return _inherits(Select, _React$Component), _createClass(Select, [ {
@@ -2399,7 +2400,7 @@
                     }) : this.props.required && // Used to be required but it's not any more
                     this.setState({
                         required: !1
-                    }), this.state.inputValue && this.props.value !== nextProps.value && nextProps.onSelectResetsInput && this.setState({
+                    }), this.state.inputValue && this.props.value !== nextProps.value && nextProps.onSelectResetsInput && this.state.isSelected && !this.props.isAlwaysOpen && this.setState({
                         inputValue: this.handleInputValueChange("")
                     });
                 }
@@ -2592,6 +2593,7 @@
                     var newInputValue = event.target.value;
                     this.state.inputValue !== event.target.value && (newInputValue = this.handleInputValueChange(newInputValue)), 
                     this.setState({
+                        isSelected: !1,
                         inputValue: newInputValue,
                         isOpen: !0,
                         isPseudoFocused: !1
@@ -2605,6 +2607,7 @@
                         null != nextState && "object" !== ("undefined" == typeof nextState ? "undefined" : _typeof(nextState)) && (newValue = "" + nextState);
                     }
                     this.setState({
+                        isSelected: !1,
                         inputValue: newValue
                     });
                 }
@@ -2753,6 +2756,7 @@
                     this.props.closeOnSelect && (this.hasScrolledToOption = !1);
                     var updatedValue = this.props.onSelectResetsInput ? "" : this.state.inputValue;
                     this.props.multi ? this.setState({
+                        isSelected: !0,
                         focusedIndex: null,
                         inputValue: this.handleInputValueChange(updatedValue),
                         isOpen: !this.props.closeOnSelect || this.props.isAlwaysOpen
@@ -2762,6 +2766,7 @@
                             return i[_this3.props.valueKey] === value[_this3.props.valueKey];
                         }) ? _this3.removeValue(value) : _this3.addValue(value);
                     }) : this.setState({
+                        isSelected: !0,
                         inputValue: this.handleInputValueChange(updatedValue),
                         isOpen: !this.props.closeOnSelect || this.props.isAlwaysOpen,
                         isPseudoFocused: this.state.isFocused
