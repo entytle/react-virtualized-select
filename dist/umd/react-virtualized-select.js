@@ -4735,7 +4735,8 @@
             }, {
                 key: "filterOptions",
                 value: function filterOptions() {
-                    var _props2 = this.props, filterOptions = _props2.filterOptions, isValidNewOption = _props2.isValidNewOption, promptTextCreator = _props2.promptTextCreator, showNewOptionAtTop = _props2.showNewOptionAtTop, excludeOptions = (arguments.length <= 2 ? void 0 : arguments[2]) || [], filteredOptions = filterOptions.apply(void 0, arguments) || [];
+                    var _props2 = this.props, filterOptions = _props2.filterOptions, isValidNewOption = _props2.isValidNewOption, promptTextCreator = _props2.promptTextCreator, showNewOptionAtTop = _props2.showNewOptionAtTop, excludeOptions = (arguments.length <= 2 ? void 0 : arguments[2]) || [], filteredOptions = "function" == typeof filterOptions ? filterOptions.apply(void 0, arguments) : _defaultFilterOptions2.default.apply(void 0, arguments);
+                    // const filteredOptions = filterOptions ? filterOptions(...params) : [];
                     if (isValidNewOption({
                         label: this.inputValue
                     })) {
