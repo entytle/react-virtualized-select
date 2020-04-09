@@ -103,7 +103,7 @@
     "react": "^15.3.0",
     "react-addons-test-utils": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-select": "github:entytle/react-select#v1.x",
+    "react-select": "github:entytle/react-select#133ad360856f7c4a06d0942c2c59584a73e47808",
     "react-transform-catch-errors": "^1.0.2",
     "react-transform-hmr": "^1.0.2",
     "react-virtualized": "9.7.4",
@@ -119,7 +119,7 @@
   "dependencies": {
     "babel-runtime": "^6.11.6",
     "prop-types": "^15.5.8",
-    "react-select": "github:entytle/react-select#v1.x",
+    "react-select": "github:entytle/react-select#133ad360856f7c4a06d0942c2c59584a73e47808",
     "react-virtualized": "9.7.4"
   },
   "peerDependencies": {
