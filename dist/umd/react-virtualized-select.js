@@ -3737,7 +3737,7 @@
             props.ignoreCase && (filterValue = filterValue.toLowerCase()), props.trimFilter && (filterValue = (0, 
             _trim2.default)(filterValue)), excludeOptions && (excludeOptions = excludeOptions.map(function(i) {
                 return i[props.valueKey];
-            })), options.filter(function(option) {
+            })), options && Array.isArray(options) ? options.filter(function(option) {
                 if (excludeOptions && excludeOptions.indexOf(option[props.valueKey]) > -1) return !1;
                 if (props.filterOption) return props.filterOption.call(void 0, option, filterValue);
                 if (!filterValue) return !0;
@@ -3749,7 +3749,7 @@
                 _stripDiacritics2.default)(labelTest))), props.ignoreCase && (valueTest && "label" !== props.matchProp && (valueTest = valueTest.toLowerCase()), 
                 labelTest && "value" !== props.matchProp && (labelTest = labelTest.toLowerCase())), 
                 "start" === props.matchPos ? valueTest && "label" !== props.matchProp && valueTest.substr(0, filterValue.length) === filterValue || labelTest && "value" !== props.matchProp && labelTest.substr(0, filterValue.length) === filterValue : valueTest && "label" !== props.matchProp && valueTest.indexOf(filterValue) >= 0 || labelTest && "value" !== props.matchProp && labelTest.indexOf(filterValue) >= 0;
-            });
+            }) : [];
         };
         exports.default = filterOptions;
     }, /* 115 */
