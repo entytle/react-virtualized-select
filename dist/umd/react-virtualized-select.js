@@ -2900,7 +2900,7 @@
             }, {
                 key: "renderLoading",
                 value: function() {
-                    if (this.props.isLoading) return _react2.default.createElement("span", {
+                    if (this.props.isLoading || this.props.loading) return _react2.default.createElement("span", {
                         className: "Select-loading-zone",
                         "aria-hidden": "true"
                     }, _react2.default.createElement("span", {
@@ -3268,6 +3268,7 @@
             // set the components instanceId
             isLoading: _propTypes2.default.bool,
             // whether the Select is loading externally or not (such as options being loaded)
+            loading: _propTypes2.default.bool,
             joinValues: _propTypes2.default.bool,
             // joins multiple values into a single form field with the delimiter (legacy mode)
             labelKey: _propTypes2.default.string,
@@ -3384,6 +3385,7 @@
             ignoreCase: !0,
             inputProps: {},
             isLoading: !1,
+            loading: !1,
             joinValues: !1,
             labelKey: "label",
             matchPos: "any",
